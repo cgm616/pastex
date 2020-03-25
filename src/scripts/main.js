@@ -67,7 +67,14 @@ function showPaste(id) {
             var node = document.createElement("p");
             node.append(document.createTextNode(text));
             pasteContent.append(node);
-            renderMathInElement(pasteContent);
+            renderMathInElement(pasteContent, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "\[", right: "\]", display: true },
+                    { left: "$", right: "$", display: false },
+                    { left: "\(", right: "\)", display: false }
+                ]
+            });
         });
 }
 
