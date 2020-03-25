@@ -9,57 +9,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (pid != null) {
         showPaste(pid);
+    } else {
+        const goButton = document.getElementById("go-to-pastex-id");
+        const pastexId = document.getElementById("pastex-id");
+
+        goButton.addEventListener('click', () => {
+            disable(goButton);
+            goToId(pastexId.value);
+        })
+
+        const shareButton = document.getElementById("share-button");
+        const shareText = document.getElementById("share-text");
+
+        shareButton.addEventListener('click', () => {
+            disable(shareButton);
+            var s = new String(shareText.value);
+
+            fetch('https://cors-anywhere.herokuapp.com/http://ix.io', {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({ "f:1": s, }),
+            }).then((data) => data.text())
+                .then((text) => goToId(text.replace("http://ix.io/", "")));
+        })
     }
-
-    // Get all "navbar-burger" elements
-    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-
-    // Check if there are any navbar burgers
-    if ($navbarBurgers.length > 0) {
-
-        // Add a click event on each of them
-        $navbarBurgers.forEach(el => {
-            el.addEventListener('click', () => {
-
-                // Get the target from the "data-target" attribute
-                const target = el.dataset.target;
-                const $target = document.getElementById(target);
-
-                // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-                el.classList.toggle('is-active');
-                $target.classList.toggle('is-active');
-
-            });
-        });
-    }
-
-
-    const goButton = document.getElementById("go-to-pastex-id");
-    const pastexId = document.getElementById("pastex-id");
-
-    goButton.addEventListener('click', () => {
-        // TODO: make this use query string
-        // window.location.href = window.location.href + pastexId.value;
-    })
-
-    const shareButton = document.getElementById("share-button");
-    const shareText = document.getElementById("share-text");
-
-    shareButton.addEventListener('click', () => {
-        var s = new String(shareText.value);
-
-        fetch('https://cors-anywhere.herokuapp.com/http://ix.io', {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams({ "f:1": s, }),
-        }).then((data) => data.text())
-            .then((text) => goToId(text.replace("http://ix.io/", "")));
-    })
-
 });
+
+function disable(button) {
+    button.classList.add("is-loading")
+}
 
 function goToId(id) {
     window.location.href = baseUrl + "?id=" + id;
@@ -71,8 +52,10 @@ function showPaste(id) {
     toggleHidden(home);
     toggleHidden(paste);
 
-
     document.getElementById('pasteid').append(id);
+    const link = document.getElementById('link');
+    link.innerHTML = window.location.href;
+    link.href = window.location.href;
 
     const pasteContent = document.getElementById('paste-content');
 
@@ -89,6 +72,5 @@ function showPaste(id) {
 }
 
 function toggleHidden(element) {
-    element.classList.toggle("is-hidden-tablet");
-    element.classList.toggle("is-hidden-mobile");
+    element.classList.toggle("is-hidden");
 }
