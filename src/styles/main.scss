@@ -1,4 +1,10 @@
 @import "node_modules/bulma/bulma.sass";
 .container {
-  max-width: 40rem;
+  max-width: 42rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.footer {
+  background-color: white;
 }
