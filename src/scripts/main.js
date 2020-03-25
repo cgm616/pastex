@@ -1,6 +1,6 @@
 import renderMathInElement from "katex/dist/contrib/auto-render";
 
-const baseUrl = "http://localhost:8080/public/"
+const baseUrl = "https://pastex.cgm616.me/"
 
 document.addEventListener('DOMContentLoaded', () => {
 
