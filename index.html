@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>PasTeX</title>
+        <link rel="stylesheet" href="./assets/styles/main.css">
+        <script src="./assets/scripts/bundle.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+        <!-- The loading of KaTeX is deferred to speed up page rendering -->
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+
+        <!-- To automatically render math in text elements, include the auto-render extension: -->
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
+    </head>
+
+    <body>
+        <section class="section">
+            <div class="container">
+                <h1 class="title is-1">
+                    Welcome to PasTeX
+                </h1>
+                <p class="subtitle is-4">
+                    An online, easy to use pasteboard for sharing \(\LaTeX\).
+                </p>
+            </div>
+        </section>
+        <section id="home">
+            <div class="container">
+                <div class="box">
+                    <div class="content">
+                        <p>
+                            <strong>To access</strong> \(\LaTeX\) someone else has shared, you'll need either the link (which you can visit directly) or the PasTeX id, which you can put into the input box below.
+                        </p>
+                    </div>
+                    <div class="field is-grouped">
+                        <div class="control is-expanded">
+                            <input class="input is-fullwidth" type="text" placeholder="PasTeX id" id="pastex-id">
+                        </div>
+                        <div class="control">
+                            <a class="button is-dark" id="go-to-pastex-id">Go</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="content">
+                        <p>
+                            <strong>To share</strong> \(\LaTeX\), simply put your math-mode code below and press Share to get a unique link.
+                        </p>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <textarea class="textarea" placeholder="Put math-mode code here!" id="share-text"></textarea>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control is-expanded">
+                            <button class="button is-dark is-fullwidth" id="share-button">Share</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content">
+                    <p>
+                        PasTeX was built by Cole Graber-Mitchell in the wake of the COVID-19 pandemic to better communicate math with classmates.
+                        The source code is <a href="https://github.com/cgm616/pastex">freely available</a> and MIT-licensed.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section id="paste" class="is-hidden-tablet is-hidden-mobile">
+            <div class="container">
+                <div class="content">
+                    <a href="./">\(\leftarrow\) Back to home</a>
+                    <p>
+                        Your content at id <code id="pasteid"></code> is rendered below:
+                    </p>
+                </div>
+                <div class="box">
+                    <div class="content" id="paste-content">
+                    </div>
+                </div>
+                <div class="content">
+                    <p>
+                        PasTeX was built by Cole Graber-Mitchell in the wake of the COVID-19 pandemic to better communicate math with classmates.
+                        The source code is <a href="https://github.com/cgm616/pastex">freely available</a> and MIT-licensed.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section class="footer">
+        </section>
+    </body>
+
+</html>
