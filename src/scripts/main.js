@@ -76,6 +76,7 @@ function showPaste(id) {
     .then(data => data.text())
     .then(text => {
       var node = document.createElement("p");
+      node.style.whiteSpace = "pre-wrap";
       node.append(document.createTextNode(text));
       pasteContent.append(node);
       renderMathInElement(pasteContent, {
