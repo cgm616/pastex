@@ -2,7 +2,7 @@ import renderMathInElement from "katex/dist/contrib/auto-render";
 
 const baseUrl = "https://pastex.cgm616.me/";
 
-window.addEventListener("pageshow", function(event) {
+window.addEventListener("pageshow", function (event) {
   var historyTraversal =
     event.persisted ||
     (typeof window.performance != "undefined" &&
@@ -35,6 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
       disable(shareButton);
       var s = new String(shareText.value);
 
+      if (0 === s.length) {
+        showPasteError("You cannot paste with no content.");
+        enable(shareButton);
+        return;
+      }
+
       fetch("https://cors-anywhere.herokuapp.com/http://ix.io", {
         method: "POST",
         mode: "cors",
@@ -51,6 +57,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function disable(button) {
   button.classList.add("is-loading");
+}
+
+function enable(button) {
+  button.classList.remove("is-loading");
 }
 
 function goToId(id) {
@@ -92,4 +102,10 @@ function showPaste(id) {
 
 function toggleHidden(element) {
   element.classList.toggle("is-hidden");
+}
+
+function showPasteError(error) {
+  var errorBox = document.getElementById("share-error");
+  errorBox.innerText = error;
+  errorBox.classList.remove("is-hidden");
 }
