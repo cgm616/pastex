@@ -115,11 +115,9 @@ function showPaste(id) {
   toggleHidden(paste);
 
   document.getElementById("pasteid").append(id);
-  const link = document.getElementById("link");
-  link.innerHTML = window.location.href;
-  link.href = window.location.href;
 
-  const pasteContent = document.getElementById("paste-content");
+  const rendered = document.getElementById("rendered-content");
+  const raw = document.getElementById("raw-content");
 
   fetch("https://cors-anywhere.herokuapp.com/http://ix.io/" + id, {
     method: "GET"
@@ -129,8 +127,9 @@ function showPaste(id) {
       var node = document.createElement("p");
       node.style.whiteSpace = "pre-wrap";
       node.append(document.createTextNode(text));
-      pasteContent.append(node);
-      renderMathInElement(pasteContent, {
+      rendered.append(node.cloneNode(true));
+      raw.append(node);
+      renderMathInElement(rendered, {
         delimiters: [
           { left: "$$", right: "$$", display: true },
           { left: "\\[", right: "\\]", display: true },
@@ -139,6 +138,23 @@ function showPaste(id) {
         ]
       });
     });
+
+  document.getElementById("rendered-tab").addEventListener('click', () => {
+    document.getElementById("rendered-content").classList.remove("is-hidden");
+    document.getElementById("raw-content").classList.add("is-hidden");
+
+    document.getElementById("rendered-tab").classList.add("is-active");
+    document.getElementById("raw-tab").classList.remove("is-active");
+  });
+
+  document.getElementById("raw-tab").addEventListener('click', () => {
+    document.getElementById("raw-content").classList.remove("is-hidden");
+    document.getElementById("rendered-content").classList.add("is-hidden");
+
+
+    document.getElementById("raw-tab").classList.add("is-active");
+    document.getElementById("rendered-tab").classList.remove("is-active");
+  });
 }
 
 function toggleHidden(element) {

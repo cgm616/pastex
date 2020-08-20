@@ -89,15 +89,19 @@
             <div class="container">
                 <div class="content">
                     <a href="./">\(\leftarrow\) Back to home</a>
-                    <br><br>
-                    <p>
-                        This \(\LaTeX\) is publically available at <a id="link"></a> and has PasTeX id <code id="pasteid"></code>.
-                    </p>
                 </div>
-                <div class="box">
-                    <div class="content" id="paste-content">
+                <div class="panel">
+                    <p class="panel-heading">PasTeX <span id="pasteid"></span></p>
+                    <div class="panel-tabs">
+                        <a class="is-active" id="rendered-tab">Rendered \(\LaTeX\)</a>
+                        <a id="raw-tab">Raw code</a>
+                    </div>
+                    <div class="panel-block is-fullwidth" style="display:block">
+                        <div class="content" id="rendered-content"></div>
+                        <div class="content is-hidden" id="raw-content"></div>
                     </div>
                 </div>
+
                 <hr class="rule">
                 <div class="content">
                     <p>
