@@ -64,7 +64,13 @@
                             <textarea class="textarea" placeholder="Text and code goes here" id="share-text"></textarea>
                         </div>
                     </div>
-                    <div class="field">
+                    <div id="share-error" class="notification is-danger is-hidden is-light"></div>
+                    <div id="share-preview" class="notification is-hidden">
+                    </div>
+                    <div class="field is-grouped">
+                        <div class="control is-expanded">
+                            <button class="button is-light is-fullwidth" id="preview-button">Preview</button>
+                        </div>
                         <div class="control is-expanded">
                             <button class="button is-dark is-fullwidth" id="share-button">Share</button>
                         </div>
