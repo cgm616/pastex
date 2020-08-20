@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const pastexId = document.getElementById("pastex-id");
 
     goButton.addEventListener("click", () => {
-      disable(goButton);
+      disableButton(goButton);
       goToId(pastexId.value);
     });
 
@@ -32,12 +32,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const shareText = document.getElementById("share-text");
 
     shareButton.addEventListener("click", () => {
-      disable(shareButton);
+      disableButton(shareButton);
       var s = new String(shareText.value);
 
       if (0 === s.length) {
         showPasteError("You cannot paste with no content.");
-        enable(shareButton);
+        enableButton(shareButton);
         return;
       }
 
@@ -52,14 +52,55 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(data => data.text())
         .then(text => goToId(text.replace("http://ix.io/", "")));
     });
+
+    const previewButton = document.getElementById("preview-button");
+
+    previewButton.addEventListener("click", () => {
+      console.log("Previewing...");
+      disableButton(previewButton);
+      var s = new String(shareText.value);
+
+      if (0 === s.length) {
+        showPasteError("Nothing to preview!");
+        enableButton(previewButton);
+        return;
+      }
+
+      const previewNote = document.getElementById("share-preview");
+
+      previewNote.innerText = s;
+
+      var error = false;
+      hidePasteError();
+
+      renderMathInElement(previewNote, {
+        delimiters: [
+          { left: "$$", right: "$$", display: true },
+          { left: "\\[", right: "\\]", display: true },
+          { left: "$", right: "$", display: false },
+          { left: "\\(", right: "\\)", display: false }
+        ],
+        errorCallback: (msg, err) => {
+          showPasteError(err.message);
+          previewNote.classList.add("is-hidden");
+          error = true;
+        }
+      });
+
+      if (error == false) {
+        previewNote.classList.remove("is-hidden");
+      }
+
+      enableButton(previewButton);
+    })
   }
 });
 
-function disable(button) {
+function disableButton(button) {
   button.classList.add("is-loading");
 }
 
-function enable(button) {
+function enableButton(button) {
   button.classList.remove("is-loading");
 }
 
@@ -108,4 +149,9 @@ function showPasteError(error) {
   var errorBox = document.getElementById("share-error");
   errorBox.innerText = error;
   errorBox.classList.remove("is-hidden");
+}
+
+function hidePasteError() {
+  var errorBox = document.getElementById("share-error");
+  errorBox.classList.add("is-hidden");
 }
