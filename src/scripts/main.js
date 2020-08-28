@@ -84,7 +84,8 @@ document.addEventListener("DOMContentLoaded", () => {
           showPasteError(err.message);
           previewNote.classList.add("is-hidden");
           error = true;
-        }
+        },
+        trust: (context) => ['\\url', '\\href'].includes(context.command),
       });
 
       if (error == false) {
@@ -135,7 +136,8 @@ function showPaste(id) {
           { left: "\\[", right: "\\]", display: true },
           { left: "$", right: "$", display: false },
           { left: "\\(", right: "\\)", display: false }
-        ]
+        ],
+        trust: (context) => ['\\url', '\\href'].includes(context.command),
       });
     });
 
