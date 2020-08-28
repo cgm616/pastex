@@ -28,6 +28,8 @@ $$ \delta_{i, j} =
     \end{cases}$$
 ```
 
+![rendered example](https://raw.githubusercontent.com/cgm616/pastex/master/example.png)
+
 A full list of supported LaTeX functions and symbols can be found at the [KaTeX documentation](https://katex.org/docs/supported.html).
 Suffice it to say that most anything you might want to use in math-mode is supported.
 
