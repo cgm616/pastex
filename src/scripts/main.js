@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      fetch("https://cors-anywhere.herokuapp.com/http://ix.io", {
+      fetch("https://dyng25qsg5.execute-api.eu-central-1.amazonaws.com/dev/?url=http://ix.io", {
         method: "POST",
         mode: "cors",
         headers: {
