@@ -120,7 +120,7 @@ function showPaste(id) {
   const rendered = document.getElementById("rendered-content");
   const raw = document.getElementById("raw-content");
 
-  fetch("https://cors-anywhere.herokuapp.com/http://ix.io/" + id, {
+  fetch("https://dyng25qsg5.execute-api.eu-central-1.amazonaws.com/dev/?url=http://ix.io/" + id, {
     method: "GET"
   })
     .then(data => data.text())
